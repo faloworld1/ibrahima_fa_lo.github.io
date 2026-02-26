@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Ibrahima Fa Lo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            color: #1abc9c;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 2rem 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #2980b9;
+        }
+        .tag {
+            display: inline-block;
+            background: #ecf0f1;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 10px;
+            color: #7f8c8d;
+        }
+        .btn {
+            display: inline-block;
+            background: #2980b9;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+        .btn:hover {
+            background: #34495e;
+        }
+        footer {
+            background: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #1abc9c;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Ibrahima Fa Lo</h1>
+        <p>Data Scientist & Data Engineer | ENSAE & Master BIDABI</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Mes Projets Phares</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h3>Pipeline ETL Trading Automatisé</h3>
+                <div>
+                    <span class="tag">Python</span>
+                    <span class="tag">SQL</span>
+                    <span class="tag">Docker</span>
+                    <span class="tag">API</span>
+                </div>
+                <p>Architecture de bout en bout pour l'extraction de données boursières via API, nettoyage, standardisation et chargement en base de données relationnelle sans intervention humaine.</p>
+                <a href="https://github.com/TON-PSEUDO/nom-du-repo-etl" class="btn" target="_blank">Voir le code sur GitHub</a>
+            </div>
+
+            <div class="card">
+                <h3>IA Conversationnelle en Wolof</h3>
+                <div>
+                    <span class="tag">NLP</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">Python</span>
+                </div>
+                <p>Développement d'un agent conversationnel en langue locale. Traitement du langage naturel (NLP), classification de texte et structuration d'une base de connaissances linguistique.</p>
+                <a href="https://github.com/TON-PSEUDO/nom-du-repo-wolof" class="btn" target="_blank">Voir le code sur GitHub</a>
+            </div>
+
+            <div class="card">
+                <h3>Analyse Exploratoire - ClassicModels</h3>
+                <div>
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">Pandas</span>
+                    <span class="tag">Matplotlib</span>
+                </div>
+                <p>Exploration et analyse approfondie de la base de données ClassicModels. Nettoyage des données, statistiques descriptives et Data Storytelling pour l'aide à la décision.</p>
+                <a href="https://github.com/TON-PSEUDO/nom-du-repo-classicmodels" class="btn" target="_blank">Voir le code sur GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Basé à Montmagny, Île-de-France</p>
+        <p>
+            <a href="mailto:loibrahimafa@gmail.com">Email</a> | 
+            <a href="https://www.linkedin.com/in/ibrahima-fa-lo/" target="_blank">LinkedIn</a> | 
+            <a href="https://github.com/TON-PSEUDO" target="_blank">GitHub</a>
+        </p>
+    </footer>
+
+</body>
+</html>
