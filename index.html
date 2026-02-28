@@ -3,152 +3,1069 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Ibrahima Fa Lo</title>
+    <title>Gestion Filière AS - Moderne</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
+            box-sizing: border-box;
         }
-        header {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 3rem 0;
-            text-align: center;
+
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --danger: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #f8f9fa;
+            --glass: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --border: rgba(255, 255, 255, 0.18);
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        header p {
-            font-size: 1.2rem;
-            margin-top: 10px;
-            color: #1abc9c;
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 118, 117, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.2) 0%, transparent 50%);
+            z-index: -1;
         }
-        .container {
-            width: 80%;
-            margin: auto;
+
+        /* Navigation */
+        .navbar {
+            background: rgba(26, 26, 46, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-link {
+            color: white !important;
+            padding: 0.5rem 1rem !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
             overflow: hidden;
-            padding: 2rem 0;
+            margin: 0 0.2rem;
         }
-        .section-title {
-            text-align: center;
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            left: 0;
+        }
+
+        .nav-link:hover {
+            transform: translateY(-2px);
+            color: white !important;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
             margin-bottom: 2rem;
-            color: #2c3e50;
+            overflow: hidden;
+            animation: slideUp 0.6s ease;
         }
-        .grid {
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            background: var(--glass);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        /* Dashboard Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #a8edea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Buttons */
+        .btn {
+            border: none;
+            border-radius: 25px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--warning);
+            color: white;
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        /* Tables */
+        .table-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .table {
+            margin: 0;
+            background: transparent;
+        }
+
+        .table thead th {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 1.5rem 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .table tbody tr {
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.01);
+        }
+
+        .table tbody td {
+            padding: 1.2rem 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            border: none;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Form Styles */
+        .form-container {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 0.75rem 1rem;
+            color: white;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Page Titles */
+        .page-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #fff 0%, #a8edea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Icons */
+        .icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 0.6s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .navbar-nav {
+                flex-direction: column;
+            }
+            
+            .table-container {
+                overflow-x: auto;
+            }
+            
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 2rem;
+            margin-top: 3rem;
         }
-        .card {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-        }
-        .card h3 {
-            margin-top: 0;
-            color: #2980b9;
-        }
-        .tag {
-            display: inline-block;
-            background: #ecf0f1;
-            padding: 5px 10px;
+
+        .dashboard-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-            margin-bottom: 10px;
-            color: #7f8c8d;
-        }
-        .btn {
-            display: inline-block;
-            background: #2980b9;
-            color: #fff;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 15px;
-        }
-        .btn:hover {
-            background: #34495e;
-        }
-        footer {
-            background: #2c3e50;
-            color: #fff;
+            padding: 2rem;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 40px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        footer a {
-            color: #1abc9c;
-            text-decoration: none;
-            margin: 0 10px;
+
+        .dashboard-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-card i {
+            font-size: 3rem;
+            background: var(--accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-card h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .dashboard-card p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Ibrahima Fa Lo</h1>
-        <p>Data Scientist & Data Engineer | ENSAE & Master BIDABI</p>
-    </header>
-
-    <div class="container">
-        <h2 class="section-title">Mes Projets Phares</h2>
-        
-        <div class="grid">
-            <div class="card">
-                <h3>Pipeline ETL Trading Automatisé</h3>
-                <div>
-                    <span class="tag">Python</span>
-                    <span class="tag">SQL</span>
-                    <span class="tag">Docker</span>
-                    <span class="tag">API</span>
-                </div>
-                <p>Architecture de bout en bout pour l'extraction de données boursières via API, nettoyage, standardisation et chargement en base de données relationnelle sans intervention humaine.</p>
-                <a href="https://github.com/TON-PSEUDO/nom-du-repo-etl" class="btn" target="_blank">Voir le code sur GitHub</a>
-            </div>
-
-            <div class="card">
-                <h3>IA Conversationnelle en Wolof</h3>
-                <div>
-                    <span class="tag">NLP</span>
-                    <span class="tag">Machine Learning</span>
-                    <span class="tag">Python</span>
-                </div>
-                <p>Développement d'un agent conversationnel en langue locale. Traitement du langage naturel (NLP), classification de texte et structuration d'une base de connaissances linguistique.</p>
-                <a href="https://github.com/TON-PSEUDO/nom-du-repo-wolof" class="btn" target="_blank">Voir le code sur GitHub</a>
-            </div>
-
-            <div class="card">
-                <h3>Analyse Exploratoire - ClassicModels</h3>
-                <div>
-                    <span class="tag">Data Analysis</span>
-                    <span class="tag">Pandas</span>
-                    <span class="tag">Matplotlib</span>
-                </div>
-                <p>Exploration et analyse approfondie de la base de données ClassicModels. Nettoyage des données, statistiques descriptives et Data Storytelling pour l'aide à la décision.</p>
-                <a href="https://github.com/TON-PSEUDO/nom-du-repo-classicmodels" class="btn" target="_blank">Voir le code sur GitHub</a>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#dashboard">
+                <i class="fas fa-graduation-cap icon"></i>Filière AS
+            </a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="#eleves">
+                    <i class="fas fa-users icon"></i>Élèves
+                </a>
+                <a class="nav-link" href="#matieres">
+                    <i class="fas fa-book icon"></i>Matières
+                </a>
+                <a class="nav-link" href="#notes">
+                    <i class="fas fa-chart-line icon"></i>Notes
+                </a>
+                <a class="nav-link" href="#emploi">
+                    <i class="fas fa-calendar icon"></i>Emploi du temps
+                </a>
+                <a class="nav-link" href="#cahier">
+                    <i class="fas fa-clipboard icon"></i>Cahier de texte
+                </a>
+                <a class="nav-link" href="#absences">
+                    <i class="fas fa-user-times icon"></i>Absences
+                </a>
+                <a class="nav-link" href="#logout">
+                    <i class="fas fa-sign-out-alt icon"></i>Déconnexion
+                </a>
             </div>
         </div>
+    </nav>
+
+    <div class="container">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="fade-in">
+            <div class="hero">
+                <h1><i class="fas fa-star icon"></i>Bienvenue Responsable de la Filière AS</h1>
+                <p>Gérez efficacement votre filière avec notre interface moderne et intuitive</p>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="dashboard-card" onclick="showSection('eleves')">
+                    <i class="fas fa-users"></i>
+                    <h3>Élèves</h3>
+                    <p>Gérer les informations des étudiants</p>
+                </div>
+                <div class="dashboard-card" onclick="showSection('matieres')">
+                    <i class="fas fa-book"></i>
+                    <h3>Matières</h3>
+                    <p>Organiser les cours et matières</p>
+                </div>
+                <div class="dashboard-card" onclick="showSection('notes')">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Notes</h3>
+                    <p>Suivre les évaluations</p>
+                </div>
+                <div class="dashboard-card" onclick="showSection('emploi')">
+                    <i class="fas fa-calendar"></i>
+                    <h3>Emploi du temps</h3>
+                    <p>Planifier les devoirs et projets</p>
+                </div>
+                <div class="dashboard-card" onclick="showSection('cahier')">
+                    <i class="fas fa-clipboard"></i>
+                    <h3>Cahier de texte</h3>
+                    <p>Documenter les cours</p>
+                </div>
+                <div class="dashboard-card" onclick="showSection('absences')">
+                    <i class="fas fa-user-times"></i>
+                    <h3>Absences</h3>
+                    <p>Suivre la présence</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Élèves Section -->
+        <section id="eleves" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-users icon"></i>Liste des élèves</h2>
+            <div class="mb-3">
+                <button class="btn btn-success">
+                    <i class="fas fa-plus icon"></i>Ajouter un élève
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-user icon"></i>Prénom</th>
+                            <th><i class="fas fa-user icon"></i>Nom</th>
+                            <th><i class="fas fa-school icon"></i>Classe</th>
+                            <th><i class="fas fa-venus-mars icon"></i>Sexe</th>
+                            <th><i class="fas fa-flag icon"></i>Nationalité</th>
+                            <th><i class="fas fa-birthday-cake icon"></i>Date de naissance</th>
+                            <th><i class="fas fa-cogs icon"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Marie</td>
+                            <td>Dubois</td>
+                            <td>AS1</td>
+                            <td>F</td>
+                            <td>Française</td>
+                            <td>15/03/2003</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pierre</td>
+                            <td>Martin</td>
+                            <td>AS2</td>
+                            <td>M</td>
+                            <td>Française</td>
+                            <td>22/07/2002</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sophie</td>
+                            <td>Bernard</td>
+                            <td>AS1</td>
+                            <td>F</td>
+                            <td>Belge</td>
+                            <td>08/11/2003</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Matières Section -->
+        <section id="matieres" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-book icon"></i>Matières</h2>
+            <div class="mb-3">
+                <button class="btn btn-success">
+                    <i class="fas fa-plus icon"></i>Ajouter une matière
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-book icon"></i>Nom</th>
+                            <th><i class="fas fa-school icon"></i>Classe</th>
+                            <th><i class="fas fa-cogs icon"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Anatomie</td>
+                            <td>AS1</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Soins infirmiers</td>
+                            <td>AS2</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pharmacologie</td>
+                            <td>AS1</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-chart-line icon"></i>Notes</h2>
+            <div class="mb-3">
+                <button class="btn btn-success">
+                    <i class="fas fa-plus icon"></i>Ajouter une note
+                </button>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-user icon"></i>Élève</th>
+                            <th><i class="fas fa-book icon"></i>Matière</th>
+                            <th><i class="fas fa-star icon"></i>Valeur</th>
+                            <th><i class="fas fa-calendar icon"></i>Date</th>
+                            <th><i class="fas fa-comment icon"></i>Commentaire</th>
+                            <th><i class="fas fa-cogs icon"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Marie Dubois</td>
+                            <td>Anatomie</td>
+                            <td><span style="color: #43e97b; font-weight: bold;">16/20</span></td>
+                            <td>15/01/2024</td>
+                            <td>Excellent travail</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Pierre Martin</td>
+                            <td>Soins infirmiers</td>
+                            <td><span style="color: #fee140; font-weight: bold;">12/20</span></td>
+                            <td>18/01/2024</td>
+                            <td>Peut mieux faire</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Emploi du temps Section -->
+        <section id="emploi" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-calendar icon"></i>Emploi du temps - Devoirs/Projets</h2>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-tasks icon"></i>Titre</th>
+                            <th><i class="fas fa-book icon"></i>Matière</th>
+                            <th><i class="fas fa-school icon"></i>Classe</th>
+                            <th><i class="fas fa-clock icon"></i>Date de dépôt</th>
+                            <th><i class="fas fa-info-circle icon"></i>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Projet fin d'études</td>
+                            <td>Soins infirmiers</td>
+                            <td>AS2</td>
+                            <td>30/05/2024</td>
+                            <td>Présentation orale et rapport écrit...</td>
+                        </tr>
+                        <tr>
+                            <td>Examen final</td>
+                            <td>Anatomie</td>
+                            <td>AS1</td>
+                            <td>25/05/2024</td>
+                            <td>Évaluation des connaissances acquises...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Cahier de texte Section -->
+        <section id="cahier" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-clipboard icon"></i>Cahier de texte</h2>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-school icon"></i>Classe</th>
+                            <th><i class="fas fa-calendar icon"></i>Date</th>
+                            <th><i class="fas fa-file-text icon"></i>Contenu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AS1</td>
+                            <td>20/01/2024</td>
+                            <td>Cours sur le système cardiovasculaire, exercices pratiques...</td>
+                        </tr>
+                        <tr>
+                            <td>AS2</td>
+                            <td>22/01/2024</td>
+                            <td>TP soins d'hygiène, techniques de communication avec...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Absences Section -->
+        <section id="absences" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-user-times icon"></i>Absences</h2>
+            <div class="empty-state">
+                <i class="fas fa-user-check"></i>
+                <h3>Aucune absence enregistrée</h3>
+                <p>Tous les élèves sont présents !</p>
+            </div>
+        </section>
+
+        <!-- Login Section -->
+        <section id="login" class="section" style="display: none;">
+            <h2 class="page-title"><i class="fas fa-sign-in-alt icon"></i>Connexion</h2>
+            <div class="form-container slide-in-left" style="max-width: 400px; margin: 0 auto;">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user icon"></i>Nom d'utilisateur
+                        </label>
+                        <input type="text" class="form-control" placeholder="Entrez votre nom d'utilisateur">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-lock icon"></i>Mot de passe
+                        </label>
+                        <input type="password" class="form-control" placeholder="Entrez votre mot de passe">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-sign-in-alt icon"></i>Se connecter
+                    </button>
+                </form>
+            </div>
+        </section>
     </div>
 
-    <footer>
-        <p>Basé à Montmagny, Île-de-France</p>
-        <p>
-            <a href="mailto:loibrahimafa@gmail.com">Email</a> | 
-            <a href="https://www.linkedin.com/in/ibrahima-fa-lo/" target="_blank">LinkedIn</a> | 
-            <a href="https://github.com/TON-PSEUDO" target="_blank">GitHub</a>
-        </p>
-    </footer>
+    <script>
+        function showSection(sectionId) {
+            // Cacher toutes les sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.style.display = 'none');
+            
+            // Cacher le dashboard
+            document.getElementById('dashboard').style.display = 'none';
+            
+            // Afficher la section demandée
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.classList.add('fade-in');
+            }
+        }
 
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                if (href === '#dashboard') {
+                    // Afficher le dashboard
+                    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
+                    document.getElementById('dashboard').style.display = 'block';
+                } else if (href === '#logout') {
+                    // Simuler la déconnexion
+                    alert('Déconnexion réussie !');
+                } else {
+                    // Afficher la section correspondante
+                    const sectionId = href.replace('#', '');
+                    showSection(sectionId);
+                }
+            });
+        });
+
+        // Animation au scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observer tous les éléments avec animation
+        document.querySelectorAll('.card, .dashboard-card, .table-container').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Effets de particules pour le hero
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.style.cssText = `
+                position: absolute;
+                width: 4px;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%;
+                pointer-events: none;
+                animation: float 6s linear infinite;
+            `;
+            
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.parentNode.removeChild(particle);
+                    }
+                }, 6000);
+            }
+        }
+
+        // Style CSS pour l'animation des particules
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Créer des particules périodiquement
+        setInterval(createParticle, 500);
+
+        // Smooth scrolling pour les liens internes
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Gestion des formulaires avec animation
+        document.querySelectorAll('.form-control').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.classList.add('focused');
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.parentElement.classList.remove('focused');
+                }
+            });
+        });
+
+        // Animation des boutons au clic
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    if (ripple.parentNode) {
+                        ripple.parentNode.removeChild(ripple);
+                    }
+                }, 600);
+            });
+        });
+
+        // Style pour l'effet ripple
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(rippleStyle);
+
+        // Gestion responsive du menu
+        function handleResize() {
+            const navbar = document.querySelector('.navbar-nav');
+            if (window.innerWidth <= 768) {
+                navbar.classList.add('mobile-nav');
+            } else {
+                navbar.classList.remove('mobile-nav');
+            }
+        }
+
+        window.addEventListener('resize', handleResize);
+        handleResize(); // Appel initial
+
+        // Animation d'apparition des éléments au chargement
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            // Animer les éléments un par un
+            const elements = document.querySelectorAll('.dashboard-card');
+            elements.forEach((el, index) => {
+                setTimeout(() => {
+                    el.style.animationDelay = index * 0.1 + 's';
+                    el.classList.add('slide-up');
+                }, index * 100);
+            });
+        });
+
+        // Style pour l'animation slide-up
+        const slideUpStyle = document.createElement('style');
+        slideUpStyle.textContent = `
+            .slide-up {
+                animation: slideUp 0.6s ease forwards;
+            }
+            
+            @keyframes slideUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .mobile-nav {
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(26, 26, 46, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 1rem;
+                border-radius: 0 0 20px 20px;
+            }
+            
+            .focused {
+                transform: scale(1.02);
+                transition: transform 0.3s ease;
+            }
+            
+            .loaded {
+                opacity: 1;
+            }
+            
+            body:not(.loaded) {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+        `;
+        document.head.appendChild(slideUpStyle);
+
+        console.log('🎨 Interface moderne chargée avec succès !');
+    </script>
 </body>
 </html>
