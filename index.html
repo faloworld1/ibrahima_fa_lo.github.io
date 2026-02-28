@@ -1,1071 +1,961 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion Filière AS - Moderne</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ibrahima Fa Lo — Data Scientist & Data Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #0f1b2d;
+      --navy-light: #162338;
+      --teal: #00b4a0;
+      --teal-light: #00d4bc;
+      --cream: #f5f2ec;
+      --cream-dark: #ebe7de;
+      --text: #1a1a2e;
+      --text-muted: #5a6070;
+      --white: #ffffff;
+      --border: #ddd8ce;
+    }
 
-        :root {
-            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            --warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            --danger: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
-            --dark: #1a1a2e;
-            --darker: #16213e;
-            --light: #f8f9fa;
-            --glass: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --border: rgba(255, 255, 255, 0.18);
-        }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--primary);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+    html { scroll-behavior: smooth; }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 118, 117, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 226, 0.2) 0%, transparent 50%);
-            z-index: -1;
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
 
-        /* Navigation */
-        .navbar {
-            background: rgba(26, 26, 46, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      background: rgba(245, 242, 236, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
 
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-        }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
 
-        .nav-link {
-            color: white !important;
-            padding: 0.5rem 1rem !important;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            margin: 0 0.2rem;
-        }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
 
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--accent);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
 
-        .nav-link:hover::before {
-            left: 0;
-        }
+    .nav-links a:hover { color: var(--teal); }
 
-        .nav-link:hover {
-            transform: translateY(-2px);
-            color: white !important;
-        }
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 0 5%;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        /* Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(0,180,160,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
 
-        /* Cards */
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            overflow: hidden;
-            animation: slideUp 0.6s ease;
-        }
+    .hero-badge {
+      display: inline-block;
+      background: var(--navy);
+      color: var(--teal-light);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
 
-        .card-header {
-            background: var(--glass);
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
+    .hero h1 span {
+      color: var(--teal);
+    }
 
-        .card-body {
-            padding: 2rem;
-        }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2rem;
+      font-weight: 300;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
 
-        /* Dashboard Hero */
-        .hero {
-            text-align: center;
-            padding: 4rem 2rem;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            margin-bottom: 3rem;
-            position: relative;
-            overflow: hidden;
-        }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
-        }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.2s;
+    }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
+    .btn-primary:hover {
+      background: var(--teal);
+      transform: translateY(-2px);
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #fff 0%, #a8edea 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            position: relative;
-            z-index: 1;
-        }
+    .btn-secondary {
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+      padding: 0.9rem 2rem;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 3px;
+      transition: all 0.2s;
+    }
 
-        .hero p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            position: relative;
-            z-index: 1;
-        }
+    .btn-secondary:hover {
+      background: var(--navy);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
 
-        /* Buttons */
-        .btn {
-            border: none;
-            border-radius: 25px;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
+    /* HERO RIGHT: STATS */
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      animation: fadeUp 0.8s ease 0.4s both;
+    }
 
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
+    .stat-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
 
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
+    .stat-card:hover {
+      transform: translateX(6px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
 
-        .btn-warning {
-            background: var(--warning);
-            color: white;
-        }
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--navy);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
 
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-        }
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
+    .stat-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+    }
 
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
+    /* SECTION STYLES */
+    section { padding: 6rem 5%; }
 
-        .btn:hover::before {
-            left: 100%;
-        }
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.75rem;
+    }
 
-        /* Tables */
-        .table-container {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
 
-        .table {
-            margin: 0;
-            background: transparent;
-        }
+    /* ABOUT / PROFIL */
+    #profil {
+      background: var(--navy);
+      color: var(--white);
+    }
 
-        .table thead th {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            font-weight: 600;
-            border: none;
-            padding: 1.5rem 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
-        }
+    #profil .section-label { color: var(--teal-light); }
+    #profil .section-title { color: var(--white); }
 
-        .table tbody tr {
-            border: none;
-            transition: all 0.3s ease;
-        }
+    .profil-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
 
-        .table tbody tr:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.01);
-        }
+    .profil-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+    }
 
-        .table tbody td {
-            padding: 1.2rem 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            border: none;
-            vertical-align: middle;
-        }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
 
-        .table tbody tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.05);
-        }
+    .skill-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+    }
 
-        /* Form Styles */
-        .form-container {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow);
-        }
+    .skill-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal-light);
+      margin-bottom: 0.5rem;
+    }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+    .skill-tags {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
 
-        .form-label {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
+    /* PROJECTS */
+    #projets { background: var(--cream); }
 
-        .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 0.75rem 1rem;
-            color: white;
-            width: 100%;
-            transition: all 0.3s ease;
-        }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
 
-        .form-control:focus {
-            outline: none;
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-        }
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .form-control::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--navy));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
 
-        /* Page Titles */
-        .page-title {
-            color: white;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, #fff 0%, #a8edea 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
 
-        /* Icons */
-        .icon {
-            margin-right: 0.5rem;
-        }
+    .project-card:hover::before { opacity: 1; }
 
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.8s ease;
-        }
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    .project-icon {
+      font-size: 1.8rem;
+    }
 
-        .slide-in-left {
-            animation: slideInLeft 0.6s ease;
-        }
+    .project-link {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
 
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
+    .project-link:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .navbar-nav {
-                flex-direction: column;
-            }
-            
-            .table-container {
-                overflow-x: auto;
-            }
-            
-            .btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-        }
+    .project-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
 
-        /* Dashboard Grid */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
+    .project-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+    }
 
-        .dashboard-card {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
 
-        .dashboard-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--cream-dark);
+      color: var(--text-muted);
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+    }
 
-        .dashboard-card i {
-            font-size: 3rem;
-            background: var(--accent);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-        }
+    /* CV SECTION */
+    #cv { background: var(--cream-dark); }
 
-        .dashboard-card h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
+    .cv-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
 
-        .dashboard-card p {
-            color: rgba(255, 255, 255, 0.7);
-        }
+    .cv-timeline { display: flex; flex-direction: column; gap: 2.5rem; }
 
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 3rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
+    .timeline-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      border-bottom: 2px solid var(--teal);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-    </style>
+    .timeline-item {
+      position: relative;
+      padding-left: 1.5rem;
+      border-left: 2px solid var(--border);
+      margin-left: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      background: var(--teal);
+      border-radius: 50%;
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-role {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--navy);
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-org {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      font-style: italic;
+    }
+
+    .timeline-bullets {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      padding-left: 1rem;
+    }
+
+    .timeline-bullets li { margin-bottom: 0.2rem; }
+
+    /* CV RIGHT SIDEBAR */
+    .cv-sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+    .sidebar-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .sidebar-card-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .lang-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .lang-item:last-child { border-bottom: none; }
+
+    .lang-level {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      background: var(--cream);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+    }
+
+    .contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .contact-icon {
+      width: 32px;
+      height: 32px;
+      background: var(--navy);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .contact-list a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    .contact-list a:hover { color: var(--teal); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 2.5rem 5%;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--teal-light);
+      text-decoration: none;
+      margin: 0 0.75rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 6rem; }
+      .hero-right { display: none; }
+      .profil-grid { grid-template-columns: 1fr; }
+      .cv-layout { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="#dashboard">
-                <i class="fas fa-graduation-cap icon"></i>Filière AS
-            </a>
-            <div class="navbar-nav">
-                <a class="nav-link" href="#eleves">
-                    <i class="fas fa-users icon"></i>Élèves
-                </a>
-                <a class="nav-link" href="#matieres">
-                    <i class="fas fa-book icon"></i>Matières
-                </a>
-                <a class="nav-link" href="#notes">
-                    <i class="fas fa-chart-line icon"></i>Notes
-                </a>
-                <a class="nav-link" href="#emploi">
-                    <i class="fas fa-calendar icon"></i>Emploi du temps
-                </a>
-                <a class="nav-link" href="#cahier">
-                    <i class="fas fa-clipboard icon"></i>Cahier de texte
-                </a>
-                <a class="nav-link" href="#absences">
-                    <i class="fas fa-user-times icon"></i>Absences
-                </a>
-                <a class="nav-link" href="#logout">
-                    <i class="fas fa-sign-out-alt icon"></i>Déconnexion
-                </a>
-            </div>
-        </div>
-    </nav>
 
-    <div class="container">
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="fade-in">
-            <div class="hero">
-                <h1><i class="fas fa-star icon"></i>Bienvenue Responsable de la Filière AS</h1>
-                <p>Gérez efficacement votre filière avec notre interface moderne et intuitive</p>
-            </div>
-            
-            <div class="dashboard-grid">
-                <div class="dashboard-card" onclick="showSection('eleves')">
-                    <i class="fas fa-users"></i>
-                    <h3>Élèves</h3>
-                    <p>Gérer les informations des étudiants</p>
-                </div>
-                <div class="dashboard-card" onclick="showSection('matieres')">
-                    <i class="fas fa-book"></i>
-                    <h3>Matières</h3>
-                    <p>Organiser les cours et matières</p>
-                </div>
-                <div class="dashboard-card" onclick="showSection('notes')">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Notes</h3>
-                    <p>Suivre les évaluations</p>
-                </div>
-                <div class="dashboard-card" onclick="showSection('emploi')">
-                    <i class="fas fa-calendar"></i>
-                    <h3>Emploi du temps</h3>
-                    <p>Planifier les devoirs et projets</p>
-                </div>
-                <div class="dashboard-card" onclick="showSection('cahier')">
-                    <i class="fas fa-clipboard"></i>
-                    <h3>Cahier de texte</h3>
-                    <p>Documenter les cours</p>
-                </div>
-                <div class="dashboard-card" onclick="showSection('absences')">
-                    <i class="fas fa-user-times"></i>
-                    <h3>Absences</h3>
-                    <p>Suivre la présence</p>
-                </div>
-            </div>
-        </section>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Ibrahima Fa Lo</div>
+    <ul class="nav-links">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-        <!-- Élèves Section -->
-        <section id="eleves" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-users icon"></i>Liste des élèves</h2>
-            <div class="mb-3">
-                <button class="btn btn-success">
-                    <i class="fas fa-plus icon"></i>Ajouter un élève
-                </button>
-            </div>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-user icon"></i>Prénom</th>
-                            <th><i class="fas fa-user icon"></i>Nom</th>
-                            <th><i class="fas fa-school icon"></i>Classe</th>
-                            <th><i class="fas fa-venus-mars icon"></i>Sexe</th>
-                            <th><i class="fas fa-flag icon"></i>Nationalité</th>
-                            <th><i class="fas fa-birthday-cake icon"></i>Date de naissance</th>
-                            <th><i class="fas fa-cogs icon"></i>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Marie</td>
-                            <td>Dubois</td>
-                            <td>AS1</td>
-                            <td>F</td>
-                            <td>Française</td>
-                            <td>15/03/2003</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pierre</td>
-                            <td>Martin</td>
-                            <td>AS2</td>
-                            <td>M</td>
-                            <td>Française</td>
-                            <td>22/07/2002</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sophie</td>
-                            <td>Bernard</td>
-                            <td>AS1</td>
-                            <td>F</td>
-                            <td>Belge</td>
-                            <td>08/11/2003</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Matières Section -->
-        <section id="matieres" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-book icon"></i>Matières</h2>
-            <div class="mb-3">
-                <button class="btn btn-success">
-                    <i class="fas fa-plus icon"></i>Ajouter une matière
-                </button>
-            </div>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-book icon"></i>Nom</th>
-                            <th><i class="fas fa-school icon"></i>Classe</th>
-                            <th><i class="fas fa-cogs icon"></i>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Anatomie</td>
-                            <td>AS1</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Soins infirmiers</td>
-                            <td>AS2</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pharmacologie</td>
-                            <td>AS1</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Notes Section -->
-        <section id="notes" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-chart-line icon"></i>Notes</h2>
-            <div class="mb-3">
-                <button class="btn btn-success">
-                    <i class="fas fa-plus icon"></i>Ajouter une note
-                </button>
-            </div>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-user icon"></i>Élève</th>
-                            <th><i class="fas fa-book icon"></i>Matière</th>
-                            <th><i class="fas fa-star icon"></i>Valeur</th>
-                            <th><i class="fas fa-calendar icon"></i>Date</th>
-                            <th><i class="fas fa-comment icon"></i>Commentaire</th>
-                            <th><i class="fas fa-cogs icon"></i>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Marie Dubois</td>
-                            <td>Anatomie</td>
-                            <td><span style="color: #43e97b; font-weight: bold;">16/20</span></td>
-                            <td>15/01/2024</td>
-                            <td>Excellent travail</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Pierre Martin</td>
-                            <td>Soins infirmiers</td>
-                            <td><span style="color: #fee140; font-weight: bold;">12/20</span></td>
-                            <td>18/01/2024</td>
-                            <td>Peut mieux faire</td>
-                            <td>
-                                <button class="btn btn-warning btn-sm">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-danger btn-sm">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Emploi du temps Section -->
-        <section id="emploi" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-calendar icon"></i>Emploi du temps - Devoirs/Projets</h2>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-tasks icon"></i>Titre</th>
-                            <th><i class="fas fa-book icon"></i>Matière</th>
-                            <th><i class="fas fa-school icon"></i>Classe</th>
-                            <th><i class="fas fa-clock icon"></i>Date de dépôt</th>
-                            <th><i class="fas fa-info-circle icon"></i>Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Projet fin d'études</td>
-                            <td>Soins infirmiers</td>
-                            <td>AS2</td>
-                            <td>30/05/2024</td>
-                            <td>Présentation orale et rapport écrit...</td>
-                        </tr>
-                        <tr>
-                            <td>Examen final</td>
-                            <td>Anatomie</td>
-                            <td>AS1</td>
-                            <td>25/05/2024</td>
-                            <td>Évaluation des connaissances acquises...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Cahier de texte Section -->
-        <section id="cahier" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-clipboard icon"></i>Cahier de texte</h2>
-            <div class="table-container">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th><i class="fas fa-school icon"></i>Classe</th>
-                            <th><i class="fas fa-calendar icon"></i>Date</th>
-                            <th><i class="fas fa-file-text icon"></i>Contenu</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>AS1</td>
-                            <td>20/01/2024</td>
-                            <td>Cours sur le système cardiovasculaire, exercices pratiques...</td>
-                        </tr>
-                        <tr>
-                            <td>AS2</td>
-                            <td>22/01/2024</td>
-                            <td>TP soins d'hygiène, techniques de communication avec...</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Absences Section -->
-        <section id="absences" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-user-times icon"></i>Absences</h2>
-            <div class="empty-state">
-                <i class="fas fa-user-check"></i>
-                <h3>Aucune absence enregistrée</h3>
-                <p>Tous les élèves sont présents !</p>
-            </div>
-        </section>
-
-        <!-- Login Section -->
-        <section id="login" class="section" style="display: none;">
-            <h2 class="page-title"><i class="fas fa-sign-in-alt icon"></i>Connexion</h2>
-            <div class="form-container slide-in-left" style="max-width: 400px; margin: 0 auto;">
-                <form>
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="fas fa-user icon"></i>Nom d'utilisateur
-                        </label>
-                        <input type="text" class="form-control" placeholder="Entrez votre nom d'utilisateur">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="fas fa-lock icon"></i>Mot de passe
-                        </label>
-                        <input type="password" class="form-control" placeholder="Entrez votre mot de passe">
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-sign-in-alt icon"></i>Se connecter
-                    </button>
-                </form>
-            </div>
-        </section>
+  <!-- HERO -->
+  <section class="hero" id="accueil">
+    <div class="hero-left">
+      <span class="hero-badge">Data Scientist · Data Engineer</span>
+      <h1>Ibrahima<br><span>Fa Lo</span></h1>
+      <p class="hero-sub">
+        Étudiant en Master Big Data & Business Intelligence (Sorbonne Paris Nord) et diplômé de l'ENSAE. Passionné par l'IA générative, le NLP et la data engineering.
+      </p>
+      <div class="hero-ctas">
+        <a href="#projets" class="btn-primary">Voir mes projets</a>
+        <a href="#cv" class="btn-secondary">Mon CV</a>
+      </div>
     </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-icon">🎓</div>
+        <div>
+          <div class="stat-label">Formation</div>
+          <div class="stat-value">ENSAE + Master BIDABI</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">🏢</div>
+        <div>
+          <div class="stat-label">Expérience</div>
+          <div class="stat-value">ANSD · 2 stages</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💻</div>
+        <div>
+          <div class="stat-label">Projets GitHub</div>
+          <div class="stat-value">8 dépôts publics</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📍</div>
+        <div>
+          <div class="stat-label">Localisation</div>
+          <div class="stat-value">Saint-Denis, Île-de-France</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        function showSection(sectionId) {
-            // Cacher toutes les sections
-            const sections = document.querySelectorAll('.section');
-            sections.forEach(section => section.style.display = 'none');
-            
-            // Cacher le dashboard
-            document.getElementById('dashboard').style.display = 'none';
-            
-            // Afficher la section demandée
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.style.display = 'block';
-                targetSection.classList.add('fade-in');
-            }
+  <!-- PROFIL -->
+  <section id="profil">
+    <div class="section-label">À propos</div>
+    <h2 class="section-title">Profil professionnel</h2>
+    <div class="profil-grid fade-in">
+      <div>
+        <p class="profil-text">
+          Étudiant intégrant un Master 2 Big Data & Business Intelligence à la Sorbonne Paris Nord et diplômé de l'ENSAE en statistiques. Passionné par l'IA générative et l'optimisation des marchés (Trading), je suis familier avec le développement d'IA conversationnelles (NLP) et la structuration de pipelines de données financières (ETL).
+          <br><br>
+          Je maîtrise Python et les concepts liés aux LLMs (RAG, Prompt Engineering, LangChain). Autonome et rigoureux, je m'intéresse à la valorisation des données complexes au service de la prise de décision.
+        </p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-item">
+          <div class="skill-category">IA & NLP</div>
+          <div class="skill-tags">LLMs · RAG · Prompt Engineering · LangChain · NLP</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Data Engineering</div>
+          <div class="skill-tags">Python · Pandas · SQL · Docker · Pipelines ETL</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Big Data</div>
+          <div class="skill-tags">Apache Spark · Hadoop · Cloud Computing</div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-category">Statistiques</div>
+          <div class="skill-tags">Machine Learning · Économétrie · Modélisation · Visualisation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS -->
+  <section id="projets">
+    <div class="section-label">GitHub</div>
+    <h2 class="section-title">Mes projets</h2>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">📈</div>
+          <a href="https://github.com/faloworld1/Trading-ETL-Pipeline" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Trading ETL Pipeline</div>
+        <p class="project-desc">Architecture de bout en bout pour l'extraction de données boursières via API, nettoyage, standardisation et chargement en base de données relationnelle sans intervention humaine.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Docker</span>
+          <span class="tag">API</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">🤖</div>
+          <a href="https://github.com/faloworld1/data_science_ecosysteme" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Data Science Écosystème</div>
+        <p class="project-desc">Exploration complète de l'écosystème Data Science : outils, bibliothèques et workflows pour le traitement, l'analyse et la modélisation de données avec Python.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Machine Learning</span>
+          <span class="tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">⚡</div>
+          <a href="https://github.com/faloworld1/Traitement-de-donn-es-en-temps-r-el-avec-spark" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Traitement de données en temps réel avec Spark</div>
+        <p class="project-desc">Projet Big Data & Cloud Computing : traitement de flux de données en temps réel avec Apache Spark. Réalisé en groupe avec Ange Dassi et Safiètou Dème.</p>
+        <div class="project-tags">
+          <span class="tag">Apache Spark</span>
+          <span class="tag">Big Data</span>
+          <span class="tag">Cloud</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">📊</div>
+          <a href="https://github.com/faloworld1/Projet_big_data" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Projet Big Data</div>
+        <p class="project-desc">Analyse et traitement de données massives avec Jupyter Notebook. Exploration de techniques d'analyse avancées et de visualisation pour l'aide à la décision.</p>
+        <div class="project-tags">
+          <span class="tag">Jupyter</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Visualisation</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">🏨</div>
+          <a href="https://github.com/faloworld1/reservation-salles" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Réservation de Salles</div>
+        <p class="project-desc">Application de gestion et réservation de salles réalisée dans le cadre du cours de Base de données avancée. Gestion des utilisateurs, disponibilités et conflits de créneaux.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">BDD Avancée</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">📚</div>
+          <a href="https://github.com/faloworld1/sql_python_cours" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">SQL & Python — Cours</div>
+        <p class="project-desc">Ressources pédagogiques et exercices pratiques couvrant Python et SQL. Idéal pour consolider les fondamentaux du traitement et de la manipulation de données.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Pédagogie</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">🌐</div>
+          <a href="https://github.com/faloworld1/ibrahima_fa_lo.github.io" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Portfolio Web</div>
+        <p class="project-desc">Portfolio personnel hébergé sur GitHub Pages. Présentation des projets, compétences et parcours académique et professionnel.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-header">
+          <div class="project-icon">🔧</div>
+          <a href="https://github.com/faloworld1/git_ex" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+        <div class="project-title">Git Exercices</div>
+        <p class="project-desc">Exercices pratiques Git pour maîtriser le versioning de code : branches, merges, pull requests et gestion collaborative de projets.</p>
+        <div class="project-tags">
+          <span class="tag">Git</span>
+          <span class="tag">GitHub</span>
+          <span class="tag">Versioning</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+    <div class="section-label">Curriculum Vitae</div>
+    <h2 class="section-title">Parcours</h2>
+    <div class="cv-layout">
+
+      <div class="cv-timeline">
+
+        <!-- EXPÉRIENCES -->
+        <div class="fade-in">
+          <div class="timeline-section-title">Expériences professionnelles</div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Avr. 2025 — Juil. 2025</div>
+            <div class="timeline-role">Data Scientist & Modélisation — Stage de fin d'études</div>
+            <div class="timeline-org">Agence nationale de la Statistique et de la Démographie (ANSD) · Dakar</div>
+            <ul class="timeline-bullets">
+              <li>Conception, entraînement et validation de modèles de ML pour la prédiction de zones de vulnérabilité.</li>
+              <li>Nettoyage et harmonisation de bases de données massives et hétérogènes (Data Wrangling).</li>
+              <li>Classification des profils de ménages et analyse multidimensionnelle des facteurs de risque.</li>
+              <li>Rédaction d'un rapport de recherche technique.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Août 2024 — Oct. 2024</div>
+            <div class="timeline-role">Stagiaire Analyste Statisticien</div>
+            <div class="timeline-org">ANSD · Dakar</div>
+            <ul class="timeline-bullets">
+              <li>Design et automatisation de tableaux de bord (KPIs) pour le Recensement Général.</li>
+              <li>Collaboration avec les équipes métiers pour digitaliser les processus de remontée d'information.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Avr. 2024</div>
+            <div class="timeline-role">Enquêteur, Superviseur & Logistique</div>
+            <div class="timeline-org">ENSAE-Pierre Ndiaye & IRD France · Ziguinchor</div>
+            <ul class="timeline-bullets">
+              <li>Collecte et validation des données, supervision des enquêteurs sur le terrain.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- FORMATION -->
+        <div class="fade-in">
+          <div class="timeline-section-title">Formation</div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Sept. 2025 — En cours</div>
+            <div class="timeline-role">Master Big Data & Business Intelligence (BIDABI)</div>
+            <div class="timeline-org">Université Sorbonne Paris Nord · Villetaneuse</div>
+            <ul class="timeline-bullets">
+              <li>Économétrie, modélisation statistique et programmation Big Data.</li>
+              <li>Business Intelligence, gestion de bases de données, automatisation des processus.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">Sept. 2022 — Juil. 2025</div>
+            <div class="timeline-role">Analyste Statisticien — Niveau Ingénieur des Travaux Statistiques</div>
+            <div class="timeline-org">ENSAE-Pierre Ndiaye · Dakar</div>
+            <ul class="timeline-bullets">
+              <li>Mémoire : Prédiction de l'insécurité alimentaire via Machine Learning.</li>
+              <li>Mathématiques appliquées, statistiques, économétrie et informatique.</li>
+              <li>Vice-président du comité de coordination de l'Amicale des élèves.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-date">2022</div>
+            <div class="timeline-role">Baccalauréat S1 — Mention Bien</div>
+            <div class="timeline-org">Collège Cardinal Hyacinthe Thiandoum · Dakar</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="cv-sidebar fade-in">
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Contact</div>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon">✉️</span>
+              <a href="mailto:loibrahimafa@gmail.com">loibrahimafa@gmail.com</a>
+            </li>
+            <li>
+              <span class="contact-icon">📞</span>
+              <span>06 65 26 00 23</span>
+            </li>
+            <li>
+              <span class="contact-icon">📍</span>
+              <span>Saint-Denis, 93200, France</span>
+            </li>
+            <li>
+              <span class="contact-icon">💼</span>
+              <a href="https://www.linkedin.com/in/ibrahima-fa-lo/" target="_blank">LinkedIn</a>
+            </li>
+            <li>
+              <span class="contact-icon">🐙</span>
+              <a href="https://github.com/faloworld1" target="_blank">github.com/faloworld1</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Langues</div>
+          <div class="lang-item">
+            <span>Français</span>
+            <span class="lang-level">Langue maternelle</span>
+          </div>
+          <div class="lang-item">
+            <span>Anglais</span>
+            <span class="lang-level">Courant</span>
+          </div>
+          <div class="lang-item">
+            <span>Wolof</span>
+            <span class="lang-level">Langue maternelle</span>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Compétences clés</div>
+          <div class="skill-tags" style="color: var(--text-muted); font-size: 0.85rem; line-height: 2;">
+            Python · SQL · Docker · Apache Spark · LangChain · RAG · Prompt Engineering · Pandas · Matplotlib · Machine Learning · ETL · Business Intelligence · Git
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Soft Skills</div>
+          <div class="skill-tags" style="color: var(--text-muted); font-size: 0.85rem; line-height: 2;">
+            Vulgarisation technique · Esprit de synthèse · Gestion des priorités · Communication transverse · Autonomie · Rigueur
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p style="margin-bottom: 0.75rem;">
+      <a href="mailto:loibrahimafa@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/ibrahima-fa-lo/" target="_blank">LinkedIn</a>
+      <a href="https://github.com/faloworld1" target="_blank">GitHub</a>
+    </p>
+    <p>© 2026 Ibrahima Fa Lo · Saint-Denis, Île-de-France</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
         }
+      });
+    }, { threshold: 0.1 });
 
-        // Navigation
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const href = link.getAttribute('href');
-                if (href === '#dashboard') {
-                    // Afficher le dashboard
-                    document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-                    document.getElementById('dashboard').style.display = 'block';
-                } else if (href === '#logout') {
-                    // Simuler la déconnexion
-                    alert('Déconnexion réussie !');
-                } else {
-                    // Afficher la section correspondante
-                    const sectionId = href.replace('#', '');
-                    showSection(sectionId);
-                }
-            });
-        });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 
-        // Animation au scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        // Observer tous les éléments avec animation
-        document.querySelectorAll('.card, .dashboard-card, .table-container').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Effets de particules pour le hero
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.cssText = `
-                position: absolute;
-                width: 4px;
-                height: 4px;
-                background: rgba(255, 255, 255, 0.3);
-                border-radius: 50%;
-                pointer-events: none;
-                animation: float 6s linear infinite;
-            `;
-            
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 6 + 's';
-            
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.appendChild(particle);
-                
-                setTimeout(() => {
-                    if (particle.parentNode) {
-                        particle.parentNode.removeChild(particle);
-                    }
-                }, 6000);
-            }
-        }
-
-        // Style CSS pour l'animation des particules
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float {
-                0% {
-                    transform: translateY(100vh) rotate(0deg);
-                    opacity: 0;
-                }
-                10% {
-                    opacity: 1;
-                }
-                90% {
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-100px) rotate(360deg);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Créer des particules périodiquement
-        setInterval(createParticle, 500);
-
-        // Smooth scrolling pour les liens internes
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Gestion des formulaires avec animation
-        document.querySelectorAll('.form-control').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.classList.add('focused');
-            });
-            
-            input.addEventListener('blur', function() {
-                if (!this.value) {
-                    this.parentElement.classList.remove('focused');
-                }
-            });
-        });
-
-        // Animation des boutons au clic
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    pointer-events: none;
-                `;
-                
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    if (ripple.parentNode) {
-                        ripple.parentNode.removeChild(ripple);
-                    }
-                }, 600);
-            });
-        });
-
-        // Style pour l'effet ripple
-        const rippleStyle = document.createElement('style');
-        rippleStyle.textContent = `
-            @keyframes ripple {
-                to {
-                    transform: scale(2);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(rippleStyle);
-
-        // Gestion responsive du menu
-        function handleResize() {
-            const navbar = document.querySelector('.navbar-nav');
-            if (window.innerWidth <= 768) {
-                navbar.classList.add('mobile-nav');
-            } else {
-                navbar.classList.remove('mobile-nav');
-            }
-        }
-
-        window.addEventListener('resize', handleResize);
-        handleResize(); // Appel initial
-
-        // Animation d'apparition des éléments au chargement
-        window.addEventListener('load', () => {
-            document.body.classList.add('loaded');
-            
-            // Animer les éléments un par un
-            const elements = document.querySelectorAll('.dashboard-card');
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.style.animationDelay = index * 0.1 + 's';
-                    el.classList.add('slide-up');
-                }, index * 100);
-            });
-        });
-
-        // Style pour l'animation slide-up
-        const slideUpStyle = document.createElement('style');
-        slideUpStyle.textContent = `
-            .slide-up {
-                animation: slideUp 0.6s ease forwards;
-            }
-            
-            @keyframes slideUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            .mobile-nav {
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 26, 46, 0.95);
-                backdrop-filter: blur(20px);
-                padding: 1rem;
-                border-radius: 0 0 20px 20px;
-            }
-            
-            .focused {
-                transform: scale(1.02);
-                transition: transform 0.3s ease;
-            }
-            
-            .loaded {
-                opacity: 1;
-            }
-            
-            body:not(.loaded) {
-                opacity: 0;
-                transition: opacity 0.3s ease;
-            }
-        `;
-        document.head.appendChild(slideUpStyle);
-
-        console.log('🎨 Interface moderne chargée avec succès !');
-    </script>
 </body>
 </html>
